@@ -1,4 +1,5 @@
 """A SQL based implementation of WordRepo."""
+import os
 from typing import List
 
 import mysql.connector
@@ -18,13 +19,67 @@ class SQLWordRepo(WordRepo):
             database = db,
         )
     
-    def get_by_prefix(self, prefix: str) -> List[Word]:
-        """Get words that start with a prefix."""
+    # TODO: Close connection on disposal!
+    # TODO: ignore case when querying!
+
+    @classmethod
+    def default(cls):
+        """Get default connection."""
+        return SQLWordRepo(
+            host=os.environ["MYSQL_HOST"],
+            user=os.environ["MYSQL_USER"],
+            password=os.environ["MYSQL_PASSWORD"],
+            db=os.environ["MYSQL_DB"]
+        )
+    
+    def lookup(self, word: str) -> List[Word]:
+        """Look up a word."""
         cursor = self.db.cursor()
-        query = f"SELECT * FROM entries WHERE word LIKE '{prefix}%'"
+        query = f"""
+        SELECT * FROM entries
+        WHERE word = "{word}"
+        """
         cursor.execute(query)
 
-        return [Word(result[0], result[1], result[2]) for result in cursor]
+        return [
+            Word(res[0], res[1], res[2])
+            for res in cursor
+        ]
+    
+    def get_random_by_prefix(self, prefix: str) -> Word:
+        """Get words that start with a prefix."""
+        cursor = self.db.cursor()
+        length = len(prefix)
+        query = f"""
+        SELECT * FROM entries
+        WHERE word LIKE '{prefix}%'
+        AND CHAR_LENGTH(word) > {length}
+        ORDER BY RAND() LIMIT 1
+        """
+        cursor.execute(query)
+
+        result = cursor.fetchone()
+        if result == None:
+            return result
+        
+        return Word(result[0], result[1], result[2])
+
+    def get_random(self) -> Word:
+        """Get random word."""
+        cursor = self.db.cursor()
+        query = f"SELECT * FROM entries ORDER BY RAND() LIMIT 1"
+        cursor.execute(query)
+
+        result = cursor.fetchone()
+
+        if result == None:
+            return result
+        
+        return Word(
+            result[0],
+            result[1],
+            result[2]
+        )
 
 
 """Driver code."""
@@ -37,4 +92,5 @@ if __name__ == "__main__":
         db=os.environ["MYSQL_DB"],
     )
 
-    print(wr.get_by_prefix("ass")[10].definition)
+    print(wr.get_random_by_prefix("dog"))
+    print(wr.get_random())

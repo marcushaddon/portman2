@@ -57,6 +57,7 @@ def np_swap(aye: str, bee: str) -> Tuple[str, str]:
 # Really good!
 def pos_swap(aye: str, bee: str, pos: str) -> Tuple[int, str, str]:
     """Swap a given part of speech."""
+    # TODO: Replace instances of subword in own definition.
     swaps = 0
     a, b = TextBlob(aye), TextBlob(bee)
     apos, bpos = a.pos_tags, b.pos_tags

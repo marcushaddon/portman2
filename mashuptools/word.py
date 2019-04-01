@@ -8,3 +8,13 @@ class Word(object):
         self.word = word
         self.pos = pos
         self.definition = definition
+    
+    def __repr__(self):
+        """Represent instance."""
+        definition = self.definition.replace('\n', "")
+
+        return f"""
+Word: {self.word}
+POS: {self.pos}
+Definition: {definition}
+"""
