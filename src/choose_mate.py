@@ -11,8 +11,6 @@ first part matching last part.
 3. Index first phoneme, look up words with first phonemes compatible
 with last phoneme and then just smoosh them together.
 
-TODO: Break out mashup word functionality from mate selection
-functionality.
 TODO: Inject SQLWordrepo
 """
 
@@ -28,7 +26,7 @@ from word import Word
 
 
 def overlapping_last_syllable(syllables: List[str]) -> Word:
-    """Create portmanteau for given word."""
+    """Choose mate based on overlapping syllables."""
     wr = SQLWordRepo.default()
 
     end = syllables[-1]
@@ -88,9 +86,28 @@ def similar_pronounciation(word: str) -> Word:
     
     return results[index]
 
+def complementary_sounds(word: Word) -> Word:
+    """Choose mate based on ending/beginning sounds of syllables."""
+    CONSONANTS = "bcdfghjklmnpqrstvwxz"
+    VOWELS = "aeiou"
+    FOLLOW_WITH_VOWEL = re.compile(f"\w+([{CONSONANTS}]|[{VOWELS}]y)$")
+    FOLLOW_WITH_CONSONANT = re.compile(f"\w+([{VOWELS}]|[{CONSONANTS}]y)$")
+    # TODO: Reevaluate the y rule, consider 'e' following consonants/vowels
+    
+    edge = word.second_to_last_syllable
+    cons = FOLLOW_WITH_CONSONANT.match(edge)
+    vowel = FOLLOW_WITH_VOWEL.match(edge)
+
+    print(f"CONS: {cons}")
+    print(f"VOWEL: {vowel}")
+
+    
+
+
+
 
 
 """Driver code."""
 if __name__ == "__main__":
-    s = hyphenate.hyphenate_word("aspirated")
-    print(overlapping_last_syllable(s))
+    w = Word(None, None, None, "kicky")
+    complementary_sounds(w)

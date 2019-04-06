@@ -1,6 +1,6 @@
 """A SQL based implementation of WordRepo."""
 import os
-from typing import List
+from typing import List, Tuple
 
 import mysql.connector
 
@@ -42,7 +42,7 @@ class SQLWordRepo(WordRepo):
         cursor.execute(query)
 
         return [
-            Word(res[0], res[1], res[2])
+            Word(res[0], res[1], res[2], res[3], res[4], res[5], res[6])
             for res in cursor
         ]
     
@@ -62,7 +62,7 @@ class SQLWordRepo(WordRepo):
         if result == None:
             return result
         
-        return Word(result[0], result[1], result[2])
+        return Word(result[0], result[1], result[2], result[3], result[4], result[5], result[6])
 
     def get_random(self) -> Word:
         """Get random word."""
@@ -78,8 +78,22 @@ class SQLWordRepo(WordRepo):
         return Word(
             result[0],
             result[1],
-            result[2]
+            result[2],
+            result[3],
+            result[4],
+            result[5],
+            result[6]
         )
+    
+    def raw_query(self, query: str, fields: Tuple) -> List[Word]:
+        """Execute a raw query."""
+        cursor = self.db.cursor()
+        cursor.execute(query, fields)
+
+        return [
+            Word(res[0], res[1], res[2], result[3], result[4], result[5], result[6])
+            for res in cursor
+        ]
 
 
 """Driver code."""
