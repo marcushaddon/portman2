@@ -7,10 +7,10 @@ class Word(object):
         self, word: str = None,
         pos: str = None,
         definition: str = None,
-        second_to_last_syllable: str = None,
-        last_syllable: str = None,
         first_syllable: str = None,
         second_syllable: str = None,
+        second_to_last_syllable: str = None,
+        last_syllable: str = None,
     ):
         """Instantiate a Word."""
         self.word = word
@@ -30,4 +30,10 @@ class Word(object):
 Word: {self.word}
 POS: {self.pos}
 Definition: {definition}
+Relevant Syllables: {"-".join([
+    self.first_syllable,
+    self.second_syllable,
+    self.second_to_last_syllable,
+    self.last_syllable,
+])}
 """

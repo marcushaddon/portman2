@@ -90,10 +90,14 @@ class SQLWordRepo(WordRepo):
         cursor = self.db.cursor()
         cursor.execute(query, fields)
 
-        return [
-            Word(res[0], res[1], res[2], result[3], result[4], result[5], result[6])
+        res = [
+            Word(res[0], res[1], res[2], res[3], res[4], res[5], res[6])
             for res in cursor
         ]
+
+        print(f"RESULT FROM REPO {res}")
+
+        return res
 
 
 """Driver code."""

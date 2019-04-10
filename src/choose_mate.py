@@ -36,7 +36,7 @@ def overlapping_last_syllable(syllables: List[str]) -> Word:
 
 def _similiar_pronounciation(word: str) -> List[str]:
     """Find possible mates using pronunciation search."""
-    mates = []
+    mates: List[str] = []
     first_phones = pronouncing.phones_for_word(word)[0]
     phones = first_phones.split(" ")
     i = 0
@@ -86,20 +86,61 @@ def similar_pronounciation(word: str) -> Word:
     
     return results[index]
 
-def complementary_sounds(word: Word) -> Word:
+def compatible_sounds(word: Word) -> Word:
     """Choose mate based on ending/beginning sounds of syllables."""
+    # TODO: Dont go from second to last to second
+    # Go either from second to last to first
+    # or last to second
     CONSONANTS = "bcdfghjklmnpqrstvwxz"
     VOWELS = "aeiou"
+    # THESE ARE BROKEN
     FOLLOW_WITH_VOWEL = re.compile(f"\w+([{CONSONANTS}]|[{VOWELS}]y)$")
     FOLLOW_WITH_CONSONANT = re.compile(f"\w+([{VOWELS}]|[{CONSONANTS}]y)$")
     # TODO: Reevaluate the y rule, consider 'e' following consonants/vowels
     
-    edge = word.second_to_last_syllable
+    target_syllable = None
+    monosyllabic = False
+    if word.first_syllable == word.last_syllable:
+        monosyllabic = True
+
+    if monosyllabic:
+        edge = word.first_syllable
+        target_syllable = "second_syllable"
+    else:
+        edge = word.second_to_last_syllable
+        target_syllable = "first_syllable"
+    
     cons = FOLLOW_WITH_CONSONANT.match(edge)
     vowel = FOLLOW_WITH_VOWEL.match(edge)
 
-    print(f"CONS: {cons}")
-    print(f"VOWEL: {vowel}")
+    # This needs to be queried for
+    VOWEL_STARTERS_COUNT = 29542
+    CONSONANT_STARTER_COUNT = 145229
+
+    # TODO: make list of prefixes, suffixes to omit
+
+    start_pattern = None
+    choice = 0
+    # TODO: Dont repeat starting letter
+    if vowel:
+        start_pattern = f"^[{VOWELS}]"
+        choice = random.randint(0, VOWEL_STARTERS_COUNT)
+    else:
+        start_pattern = f"^[{CONSONANTS}]"
+        choice = random.randint(0, CONSONANT_STARTER_COUNT)
+    
+    wr = SQLWordRepo.default()
+    query = f"""
+    SELECT * FROM entries
+    WHERE {target_syllable} REGEXP %s
+    LIMIT 1
+    OFFSET %s
+    """
+
+    result = wr.raw_query(query, (start_pattern, choice))
+
+    return result
+
 
     
 
@@ -109,5 +150,6 @@ def complementary_sounds(word: Word) -> Word:
 
 """Driver code."""
 if __name__ == "__main__":
-    w = Word(None, None, None, "kicky")
-    complementary_sounds(w)
+    w = Word("deer", None, None, "deer", "deer", "deer", "deer")
+    res = compatible_sounds(w)
+    print(res)
