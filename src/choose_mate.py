@@ -16,13 +16,14 @@ TODO: Inject SQLWordrepo
 
 import re
 import random
-from typing import List
+from typing import List, Tuple
 
 import hyphenate
 import pronouncing
 
 from sqlwordrepo import SQLWordRepo
 from word import Word
+from fixes import fixes
 
 
 def overlapping_last_syllable(syllables: List[str]) -> Word:
@@ -86,7 +87,7 @@ def similar_pronounciation(word: str) -> Word:
     
     return results[index]
 
-def compatible_sounds(word: Word) -> Word:
+def compatible_sounds(word: Word) -> Tuple[Word, int, int]:
     """Choose mate based on ending/beginning sounds of syllables."""
     # TODO: Dont go from second to last to second
     # Go either from second to last to first
@@ -98,17 +99,25 @@ def compatible_sounds(word: Word) -> Word:
     FOLLOW_WITH_CONSONANT = re.compile(f"\w+([{VOWELS}]|[{CONSONANTS}]y)$")
     # TODO: Reevaluate the y rule, consider 'e' following consonants/vowels
     
-    target_syllable = None
-    monosyllabic = False
+    edge: str = ""
+    word_a_edge_index: int = -1
+    word_b_edge_index: int = 0
+    target_syllable: str = ""
+
+    monosyllabic: bool = False
     if word.first_syllable == word.last_syllable:
         monosyllabic = True
 
     if monosyllabic:
         edge = word.first_syllable
         target_syllable = "second_syllable"
+        word_a_edge_index = -1
+        word_b_edge_index = 1
     else:
         edge = word.second_to_last_syllable
         target_syllable = "first_syllable"
+        word_a_edge_index = -2
+        word_b_edge_index = 0
     
     cons = FOLLOW_WITH_CONSONANT.match(edge)
     vowel = FOLLOW_WITH_VOWEL.match(edge)
@@ -130,16 +139,26 @@ def compatible_sounds(word: Word) -> Word:
         choice = random.randint(0, CONSONANT_STARTER_COUNT)
     
     wr = SQLWordRepo.default()
+    not_in = ', '.join([f"'{fix}'" for fix in fixes])
+
     query = f"""
     SELECT * FROM entries
     WHERE {target_syllable} REGEXP %s
+    AND {target_syllable} NOT IN ({not_in})
     LIMIT 1
     OFFSET %s
     """
 
-    result = wr.raw_query(query, (start_pattern, choice))
+    result = wr.raw_query(
+        query,
+        (start_pattern, choice),
+    )
 
-    return result
+    return (
+        result[0],
+        word_a_edge_index,
+        word_b_edge_index,
+    )
 
 
     
@@ -150,6 +169,6 @@ def compatible_sounds(word: Word) -> Word:
 
 """Driver code."""
 if __name__ == "__main__":
-    w = Word("deer", None, None, "deer", "deer", "deer", "deer")
+    w = Word("pizza", None, None, "piz", "za", "piz", "za")
     res = compatible_sounds(w)
     print(res)
