@@ -95,8 +95,6 @@ class SQLWordRepo(WordRepo):
             for res in cursor
         ]
 
-        print(f"RESULT FROM REPO {res}")
-
         return res
 
 

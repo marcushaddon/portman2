@@ -1,4 +1,5 @@
 """A class for representing a dictionary entry."""
+import hyphenate
 
 class Word(object):
     """A word with a definition and part of speech."""
@@ -20,6 +21,10 @@ class Word(object):
         self.last_syllable = last_syllable
         self.first_syllable = first_syllable
         self.second_syllable = second_syllable
+    
+    @property
+    def syllables(self):
+        return hyphenate.hyphenate_word(self.word)
 
     
     def __repr__(self):

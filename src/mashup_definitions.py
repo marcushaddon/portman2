@@ -4,6 +4,8 @@ from collections import defaultdict
 
 from textblob import TextBlob
 
+from sqlwordrepo import SQLWordRepo
+
 # THIS SUCKS
 def dereassemble(aye: str, bee: str) -> str:
     """De assemble then re assemble."""
@@ -83,17 +85,46 @@ def pos_swaps(a: str, b: str, poses: List[str]) -> Tuple[int, str, str]:
     
     return (total_swaps, a, b)
 
-# def choose_pos(aye: str, bee: str) -> str:
+# Second choice
+def branch_on_pos(aye: str, bee: str, pos: str) -> str:
+    """Graft on a POS."""
+    atagged = TextBlob(a).pos_tags
+    btagged = TextBlob(b).pos_tags
+
+    awords = [tag[0] for tag in atagged]
+    bwords = [tag[0] for tag in btagged]
+    atags = [tag[1] for tag in atagged]
+    btags = [tag[1] for tag in btagged]
+
+    if not pos in atags or not pos in btags:
+        return (None, -1)
+
+    leading_cutoff = -1
+    aposindex, bposindex = atags.index(pos), btags.index(pos)
+    if aposindex > bposindex:
+        leading_cutoff = aposindex
+        composite = awords[:aposindex] + ["BREAK"] + bwords[bposindex:]
+        pass
+    else:
+        leading_cutoff = bposindex
+        composite = bwords[:bposindex] + ["BREAK"] + awords[aposindex:]
+        pass
+
+
+    return (' '.join(composite), leading_cutoff)
+
+
 
 
 if __name__ == "__main__":
-    a = "Any one of numerous species of elasmobranch fishes of the order Plagiostomi, found in all seas."
-    b = "The place in which public records or historic documents are kept."
+    wr = SQLWordRepo.default()
+    a = wr.get_random().definition
+    b = wr.get_random().definition
 
-    c = "A pointed missile weapon, intended to be thrown by the hand; a short lance; a javelin; hence, any sharp-pointed missile weapon, as an arrow."
-    d = "The utterance of the elementary sounds of a language by the appropriate movements of the organs, as in pronunciation; as, a distinct articulation."
-
-    swaps, e, f = pos_swaps(a, b, ["NNS"])
-    print(swaps)
-    print(e)
-    print(f)
+    print(f"""
+    {a} 
+    +
+    {b}
+    =
+    """)
+    print(branch_on_pos(a, b, 'IN'))

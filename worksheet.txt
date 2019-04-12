@@ -1,0 +1,161 @@
+
+1.
+[('Having', 'VBG'), ('twenty', 'JJ'), ('equal', 'JJ'), ('sides', 'NNS'), ('or', 'CC'), ('faces', 'VBZ')]
+
++ 
+
+[('A', 'DT'), ('keeping', 'VBG'), ('or', 'CC'), ('guarding', 'VBG'), ('care', 'NN'), ('watch', 'NN'), ('inspection', 'NN'), ('for', 'IN'), ('keeping', 'VBG'), ('preservation', 'NN'), ('or', 'CC'), ('security', 'NN')]
+
+=
+
+-----------------------------------------------
+
+
+
+
+
+
+----------------------------------------------
+
+
+
+2.
+[('Having', 'VBG'), ('the', 'DT'), ('quality', 'NN'), ('of', 'IN'), ('provoking', 'VBG'), ('to', 'TO'), ('sneeze', 'VB')]
+
++ 
+
+[('Having', 'VBG'), ('the', 'DT'), ('quality', 'NN'), ('of', 'IN'), ('provoking', 'VBG'), ('to', 'TO'), ('sneeze', 'VB')]
+
+=
+
+-----------------------------------------------
+
+
+
+
+
+
+----------------------------------------------
+
+
+
+4.
+[('Having', 'VBG'), ('twenty', 'JJ'), ('equal', 'JJ'), ('sides', 'NNS'), ('or', 'CC'), ('faces', 'VBZ')]
+
++ 
+
+[('A', 'DT'), ('charge', 'NN'), ('or', 'CC'), ('rate', 'NN'), ('against', 'IN'), ('lands', 'VBZ'), ('as', 'IN'), ('an', 'DT'), ('agistment', 'NN'), ('of', 'IN'), ('sea', 'NN'), ('banks', 'NNS'), ('i.', 'NN'), ('e.', 'NN'), ('charge', 'NN'), ('for', 'IN'), ('banks', 'NNS'), ('or', 'CC'), ('dikes', 'NNS')]
+
+=
+
+-----------------------------------------------
+
+A charge or rate against lands <e>having twenty different sides</e>.
+(VBG NP works anywhere?)
+
+
+
+
+----------------------------------------------
+
+
+
+5.
+[('A', 'DT'), ('keeping', 'VBG'), ('or', 'CC'), ('guarding', 'VBG'), ('care', 'NN'), ('watch', 'NN'), ('inspection', 'NN'), ('for', 'IN'), ('keeping', 'VBG'), ('preservation', 'NN'), ('or', 'CC'), ('security', 'NN')]
+
++ 
+
+[('of', 'IN'), ('Flam', 'NNP')]
+
+=
+
+-----------------------------------------------
+<whole first part> + <second part>
+(IN NN* works lots of places)
+
+
+
+
+
+----------------------------------------------
+
+
+7.
+[('Accompanying', 'NNP'), ('connected', 'VBN'), ('with', 'IN'), ('or', 'CC'), ('immediately', 'RB'), ('following', 'VBG'), ('as', 'IN'), ('consequential', 'JJ'), ('consequent', 'NN'), ('as', 'IN'), ('intemperance', 'NN'), ('with', 'IN'), ('all', 'DT'), ('its', 'PRP$'), ('attendant', 'NN'), ('evils', 'NNS')]
+
++ 
+
+[('With', 'IN'), ('reference', 'NN'), ('to', 'TO'), ('industry', 'NN')]
+
+=
+
+-----------------------------------------------
+
+
+
+
+
+
+----------------------------------------------
+
+
+
+8.
+[('One', 'CD'), ('of', 'IN'), ('a', 'DT'), ('class', 'NN'), ('of', 'IN'), ('poets', 'NNS'), ('which', 'WDT'), ('flourished', 'VBD'), ('in', 'IN'), ('Nuremberg', 'NNP'), ('and', 'CC'), ('some', 'DT'), ('other', 'JJ'), ('cities', 'NNS'), ('of', 'IN'), ('Germany', 'NNP'), ('in', 'IN'), ('the', 'DT'), ('15th', 'CD'), ('and', 'CC'), ('16th', 'CD'), ('centuries', 'NNS'), ('They', 'PRP'), ('bound', 'VBP'), ('themselves', 'PRP'), ('to', 'TO'), ('observe', 'VB'), ('certain', 'JJ'), ('arbitrary', 'JJ'), ('laws', 'NNS'), ('of', 'IN'), ('rhythm', 'NN')]
+
++ 
+
+[('One', 'CD'), ('of', 'IN'), ('a', 'DT'), ('class', 'NN'), ('of', 'IN'), ('poets', 'NNS'), ('which', 'WDT'), ('flourished', 'VBD'), ('in', 'IN'), ('Nuremberg', 'NNP'), ('and', 'CC'), ('some', 'DT'), ('other', 'JJ'), ('cities', 'NNS'), ('of', 'IN'), ('Germany', 'NNP'), ('in', 'IN'), ('the', 'DT'), ('15th', 'CD'), ('and', 'CC'), ('16th', 'CD'), ('centuries', 'NNS'), ('They', 'PRP'), ('bound', 'VBP'), ('themselves', 'PRP'), ('to', 'TO'), ('observe', 'VB'), ('certain', 'JJ'), ('arbitrary', 'JJ'), ('laws', 'NNS'), ('of', 'IN'), ('rhythm', 'NN')]
+
+=
+
+-----------------------------------------------
+
+
+
+
+
+
+----------------------------------------------
+
+
+
+9.
+[('of', 'IN'), ('Flam', 'NNP')]
+
++ 
+
+[('A', 'DT'), ('keeping', 'VBG'), ('or', 'CC'), ('guarding', 'VBG'), ('care', 'NN'), ('watch', 'NN'), ('inspection', 'NN'), ('for', 'IN'), ('keeping', 'VBG'), ('preservation', 'NN'), ('or', 'CC'), ('security', 'NN')]
+
+=
+
+-----------------------------------------------
+
+
+
+
+
+
+----------------------------------------------
+
+
+
+10.
+[('The', 'DT'), ('common', 'JJ'), ('designation', 'NN'), ('of', 'IN'), ('one', 'CD'), ('a', 'DT'), ('sect', 'NN'), ('founded', 'VBN'), ('by', 'IN'), ('the', 'DT'), ('Rev', 'NNP'), ('Edward', 'NNP'), ('Irving', 'NNP'), ('about', 'IN'), ('1830', 'CD'), ('who', 'WP'), ('call', 'VBP'), ('themselves', 'PRP'), ('the', 'DT'), ('Catholic', 'NNP'), ('Apostolic', 'NNP'), ('Church', 'NNP'), ('They', 'PRP'), ('are', 'VBP'), ('highly', 'RB'), ('ritualistic', 'JJ'), ('in', 'IN'), ('worship', 'NN'), ('have', 'VBP'), ('an', 'DT'), ('elaborate', 'JJ'), ('hierarchy', 'NN'), ('of', 'IN'), ('apostles', 'NNS'), ('prophets', 'NNS'), ('etc.', 'NN'), ('and', 'CC'), ('look', 'NN'), ('for', 'IN'), ('the', 'DT'), ('speedy', 'NN'), ('coming', 'VBG'), ('of', 'IN'), ('Christ', 'NNP')]
+
++ 
+
+[('Accompanying', 'NNP'), ('connected', 'VBN'), ('with', 'IN'), ('or', 'CC'), ('immediately', 'RB'), ('following', 'VBG'), ('as', 'IN'), ('consequential', 'JJ'), ('consequent', 'NN'), ('as', 'IN'), ('intemperance', 'NN'), ('with', 'IN'), ('all', 'DT'), ('its', 'PRP$'), ('attendant', 'NN'), ('evils', 'NNS')]
+
+=
+
+-----------------------------------------------
+
+
+
+
+
+
+----------------------------------------------
+
+

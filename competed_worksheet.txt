@@ -1,0 +1,139 @@
+
+1.
+[('According', 'VBG'), ('to', 'TO'), ('hydrostatics', 'NNS'), ('or', 'CC'), ('to', 'TO'), ('hydrostatic', 'JJ'), ('principles', 'NNS')]
+
++ 
+
+[('One', 'CD'), ('that', 'WDT'), ('has', 'VBZ'), ('the', 'DT'), ('same', 'JJ'), ('name', 'NN'), ('as', 'IN'), ('another', 'DT'), ('especially', 'RB'), ('one', 'CD'), ('called', 'VBN'), ('after', 'IN'), ('or', 'CC'), ('named', 'VBN'), ('out', 'IN'), ('of', 'IN'), ('regard', 'NN'), ('to', 'TO'), ('another', 'DT')]
+
+=
+
+-----------------------------------------------
+One that has the same name as another, especially <e>according to hydrostatics or to hydrostatic principles</e>.
+
+OR
+
+On that has the same name as another, especially on called after or named out of regard to <e>hydrostatics, or hydrostatic principles.</e>
+(Markov POS)
+
+----------------------------------------------
+
+
+
+2.
+[('The', 'DT'), ('business', 'NN'), ('of', 'IN'), ('a', 'DT'), ('seamstress', 'NN')]
+
++ 
+
+[('In', 'IN'), ('an', 'DT'), ('auricular', 'JJ'), ('manner', 'NN')]
+
+=
+
+-----------------------------------------------
+
+The business of a seamstress <e>in an auricular manner</e>.
+
+
+
+
+----------------------------------------------
+
+
+
+3.
+[('One', 'CD'), ('that', 'WDT'), ('has', 'VBZ'), ('the', 'DT'), ('same', 'JJ'), ('name', 'NN'), ('as', 'IN'), ('another', 'DT'), ('especially', 'RB'), ('one', 'CD'), ('called', 'VBN'), ('after', 'IN'), ('or', 'CC'), ('named', 'VBN'), ('out', 'IN'), ('of', 'IN'), ('regard', 'NN'), ('to', 'TO'), ('another', 'DT')]
+
++ 
+
+[('A', 'DT'), ('car', 'NN'), ('on', 'IN'), ('a', 'DT'), ('horse', 'NN'), ('railroad', 'NN')]
+
+=
+
+-----------------------------------------------
+
+One that has the same name as <e>A car on a horse railroad.</e>
+
+
+
+
+----------------------------------------------
+
+
+
+4.
+[('In', 'IN'), ('an', 'DT'), ('auricular', 'JJ'), ('manner', 'NN')]
+
++ 
+
+[('Shaped', 'VBN'), ('like', 'IN'), ('a', 'DT'), ('spine', 'NN')]
+
+=
+
+-----------------------------------------------
+
+Shaped like a spine <e>In an auricular manner.</e>
+
+
+
+
+----------------------------------------------
+
+
+
+5.
+[('of', 'IN'), ('Sense', 'NN')]
+
++ 
+
+[('One', 'CD'), ('that', 'WDT'), ('has', 'VBZ'), ('the', 'DT'), ('same', 'JJ'), ('name', 'NN'), ('as', 'IN'), ('another', 'DT'), ('especially', 'RB'), ('one', 'CD'), ('called', 'VBN'), ('after', 'IN'), ('or', 'CC'), ('named', 'VBN'), ('out', 'IN'), ('of', 'IN'), ('regard', 'NN'), ('to', 'TO'), ('another', 'DT')]
+
+=
+
+-----------------------------------------------
+
+On that has the same name <e>as sense</e>.
+(Markov POS)
+
+
+
+
+----------------------------------------------
+
+
+
+9.
+[('Flourishing', 'VBG'), ('thriving', 'VBG'), ('fresh', 'JJ'), ('in', 'IN'), ('good', 'JJ'), ('case', 'NN'), ('vigorous', 'JJ')]
+
++ 
+
+[('In', 'IN'), ('an', 'DT'), ('auricular', 'JJ'), ('manner', 'NN')]
+
+=
+
+-----------------------------------------------
+Flourishing, thriving, fresh, in an auricular manner.
+(Markov POS || 'IN words work after anything?)
+
+----------------------------------------------
+
+
+
+10.
+[('A', 'DT'), ('car', 'NN'), ('on', 'IN'), ('a', 'DT'), ('horse', 'NN'), ('railroad', 'NN')]
+
++ 
+
+[('A', 'DT'), ('degraded', 'JJ'), ('form', 'NN'), ('of', 'IN'), ('superstition', 'NN'), ('and', 'CC'), ('sorcery', 'NN'), ('said', 'VBD'), ('to', 'TO'), ('include', 'VB'), ('human', 'JJ'), ('sacrifices', 'NNS'), ('and', 'CC'), ('cannibalism', 'NN'), ('in', 'IN'), ('some', 'DT'), ('of', 'IN'), ('its', 'PRP$'), ('rites', 'NNS'), ('It', 'PRP'), ('is', 'VBZ'), ('prevalent', 'JJ'), ('among', 'IN'), ('the', 'DT'), ('negroes', 'NNS'), ('of', 'IN'), ('Hayti', 'NNP'), ('and', 'CC'), ('to', 'TO'), ('some', 'DT'), ('extent', 'NN'), ('in', 'IN'), ('the', 'DT'), ('United', 'NNP'), ('States', 'NNPS'), ('and', 'CC'), ('is', 'VBZ'), ('regarded', 'VBN'), ('as', 'IN'), ('a', 'DT'), ('relic', 'NN'), ('of', 'IN'), ('African', 'JJ'), ('barbarism', 'NN')]
+
+=
+
+-----------------------------------------------
+
+A degraded form of supersticion and sorcery said to include human sacrifice and <e>a car upoon a horse railroad</e> in its rites.
+(Noun Phrase replacement?)
+
+
+
+----------------------------------------------
+
+
