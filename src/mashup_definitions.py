@@ -3,6 +3,7 @@ from typing import Dict, List, Tuple
 from collections import defaultdict
 
 from textblob import TextBlob
+import nltk
 
 from sqlwordrepo import SQLWordRepo
 
@@ -85,12 +86,19 @@ def pos_swaps(a: str, b: str, poses: List[str]) -> Tuple[int, str, str]:
     
     return (total_swaps, a, b)
 
+# TODO: RETAIN PUNCTUATION
+
 # Second choice
 def branch_on_pos(aye: str, bee: str, pos: str) -> str:
     """Graft on a POS."""
+    # Good choices are IN
     atagged = TextBlob(a).pos_tags
     btagged = TextBlob(b).pos_tags
 
+    print(atagged, "\n" * 2, btagged)
+
+    asplit = a.split(' ')
+    bsplit = b.split(' ')
     awords = [tag[0] for tag in atagged]
     bwords = [tag[0] for tag in btagged]
     atags = [tag[1] for tag in atagged]
@@ -101,30 +109,97 @@ def branch_on_pos(aye: str, bee: str, pos: str) -> str:
 
     leading_cutoff = -1
     aposindex, bposindex = atags.index(pos), btags.index(pos)
+    print("GOT TO TAGS ", aposindex, bposindex)
     if aposindex > bposindex:
         leading_cutoff = aposindex
-        composite = awords[:aposindex] + ["BREAK"] + bwords[bposindex:]
+        composite = asplit[:aposindex] + ["BREAK"] + bsplit[bposindex:]
         pass
     else:
         leading_cutoff = bposindex
-        composite = bwords[:bposindex] + ["BREAK"] + awords[aposindex:]
+        composite = bsplit[:bposindex] + ["BREAK"] + asplit[aposindex:]
         pass
-
 
     return (' '.join(composite), leading_cutoff)
 
+def find_chunk(tree: nltk.Tree, target: str, res: List[nltk.Tree] = None) -> nltk.Tree:
+    """Find and return a target chunk."""
+    res = res if res is not None else []
+    if tree.label() == target:
+        print("GOT ONE")
+        return [tree]
+
+    for subtree in tree:
+        if type(subtree) == nltk.tree.Tree:
+            res += find_chunk(subtree, target, res)
+    
+    return res
+    
+    
+    return res
+            
+        
+
+
+def swap_chunks(aye: str, bee: str) -> str:
+    """Find lil chunks and insert them."""
+    # TODO: Split sentences first
+    a = TextBlob(aye).pos_tags
+    b = TextBlob(bee).pos_tags
+
+    # TODO: "Of an elaborate or public character"
+    in_grammar = """
+    NP: {<DT>?<RB>?<JJ.*>*<N.*>} # Noun phrase
+    # INP: {<IN>+<NP>} # 'In' phrase
+    """
+    chunker = nltk.RegexpParser(in_grammar)
+
+    a_chunked = chunker.parse(a)
+    b_chunked = chunker.parse(b)
+
+    a_chunks = find_chunk(a_chunked, "NP")
+    b_chunks = find_chunk(b_chunked, "NP")
+
+    print(f"""
+    {aye}
+    -
+    {a}
+    -
+
+    ---------
+
+    {bee}
+    -
+    {b}
+    -
+    """)
+    for chunk in a_chunks:
+        print(chunk)
+    for chunk in b_chunks:
+        print(chunk)
+
+    return(a_chunks, b_chunks)
 
 
 
 if __name__ == "__main__":
-    wr = SQLWordRepo.default()
-    a = wr.get_random().definition
-    b = wr.get_random().definition
+    # wr = SQLWordRepo.default()
+    # a = wr.get_random().definition
+    # b = wr.get_random().definition
 
-    print(f"""
-    {a} 
-    +
-    {b}
-    =
-    """)
-    print(branch_on_pos(a, b, 'IN'))
+    # a = """
+    # That which is performed or accomplished; a thing done
+    # or carried through; an achievement; a deed; an act; a feat; esp., an
+    # action of an elaborate or public character.
+    # """
+
+    # b = """
+    # A document, as a letter, deed, or will, wholly in the
+    # handwriting of the person from whom it proceeds and whose act it
+    # purports to be.
+    # """
+
+    a = "The prettiest little kitty"
+    b = "This excruciatingly boring script"
+
+    ach, bch = swap_chunks(a, b)
+    
