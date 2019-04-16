@@ -120,60 +120,58 @@ def branch_on_pos(aye: str, bee: str, pos: str) -> str:
         pass
 
     return (' '.join(composite), leading_cutoff)
+            
+        
+def parse(definition: str):
+    """Get useful chunks."""
+    tags = TextBlob(definition).pos_tags
+
+    # TODO: "Of an elaborate or public character"
+    in_grammar = """
+    AP: {<RB>*<JJ.*><JJ.*>*} # Adjective Phrase
+    NP: {<DT>?<AP>?<NN.*>+(<CC><NP>)?} # Noun Phrase
+    PP: {<IN>+<OR>?<IN>?<NP>} # Prepositional Phrase
+    RPP: {<PP><PP>+} # Recursive Prepositional Phrase
+    CPP: {<PP|RPP|CPP><CC><PP|RPP|CPP>} # Compount Prepositional Phrase
+    GP: {<VBG><NP|PP|RPP|CPP|AP>?} # Gerund phrase
+    IP: {<TO><VP>} # Infinitive phrase
+    """
+    chunker = nltk.RegexpParser(in_grammar)
+
+    return chunker.parse(tags)
 
 def find_chunk(tree: nltk.Tree, target: str, res: List[nltk.Tree] = None) -> nltk.Tree:
     """Find and return a target chunk."""
     res = res if res is not None else []
     if tree.label() == target:
-        print("GOT ONE")
-        return [tree]
+        res.append(tree)
+        return
 
     for subtree in tree:
         if type(subtree) == nltk.tree.Tree:
-            res += find_chunk(subtree, target, res)
+            find_chunk(subtree, target, res)
     
     return res
-    
-    
-    return res
-            
-        
-
 
 def swap_chunks(aye: str, bee: str) -> str:
     """Find lil chunks and insert them."""
-    # TODO: Split sentences first
-    a = TextBlob(aye).pos_tags
-    b = TextBlob(bee).pos_tags
+    a_chunked = parse(aye)
+    b_chunked = parse(bee)
 
-    # TODO: "Of an elaborate or public character"
-    in_grammar = """
-    NP: {<DT>?<RB>?<JJ.*>*<N.*>} # Noun phrase
-    # INP: {<IN>+<NP>} # 'In' phrase
-    """
-    chunker = nltk.RegexpParser(in_grammar)
-
-    a_chunked = chunker.parse(a)
-    b_chunked = chunker.parse(b)
-
-    a_chunks = find_chunk(a_chunked, "NP")
-    b_chunks = find_chunk(b_chunked, "NP")
+    a_chunks = find_chunk(a_chunked, "PP")
+    b_chunks = find_chunk(b_chunked, "PP")
 
     print(f"""
     {aye}
-    -
-    {a}
-    -
 
     ---------
 
     {bee}
-    -
-    {b}
-    -
     """)
+    print("A Chunks")
     for chunk in a_chunks:
         print(chunk)
+    print("B Chunks")
     for chunk in b_chunks:
         print(chunk)
 
@@ -182,24 +180,25 @@ def swap_chunks(aye: str, bee: str) -> str:
 
 
 if __name__ == "__main__":
-    # wr = SQLWordRepo.default()
-    # a = wr.get_random().definition
-    # b = wr.get_random().definition
+    start = 0
+    end = 20
 
-    # a = """
-    # That which is performed or accomplished; a thing done
-    # or carried through; an achievement; a deed; an act; a feat; esp., an
-    # action of an elaborate or public character.
-    # """
+    with open('definitions.txt', 'r') as inf, open('definitions_report.txt', 'w') as outf:
+        for _ in range(0, start):
+            inf.readline()
+        
+        for _ in range(start, end):
+            defi = inf.readline()
+            tokens = TextBlob(defi).pos_tags
+            parsed = parse(defi)
+            outf.write(f"""
+{defi}
+-----
+{tokens}
+-------
+{parsed}
+=========================
+            """)
 
-    # b = """
-    # A document, as a letter, deed, or will, wholly in the
-    # handwriting of the person from whom it proceeds and whose act it
-    # purports to be.
-    # """
 
-    a = "The prettiest little kitty"
-    b = "This excruciatingly boring script"
-
-    ach, bch = swap_chunks(a, b)
     
